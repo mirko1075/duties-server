@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 
 const dutiesSchema = new Schema(
   {
-    description: String,
+    Id: String,
+    Name: String,
   },
   {
     timestamps: {
