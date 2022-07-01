@@ -61,12 +61,10 @@ router.delete("/:dutyId", (req, res, next) => {
 router.put("/:dutyId", (req, res, next) => {
   console.log("Put duty detail");
   const dutyId = req.params.dutyId;
-  const { Name } = req.body;
+  const { Id, Name } = req.body;
   Duties.findOneAndUpdate(
     { Id: dutyId },
-    {
-      Name,
-    },
+    { Id, Name },
     {
       returnDocument: "after",
     }

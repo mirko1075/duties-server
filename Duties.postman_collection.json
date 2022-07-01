@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "15675e75-58b6-4c08-bea9-fb913dc5667b",
+		"name": "Duties",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13535597"
+	},
+	"item": [
+		{
+			"name": "Get all duties",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/duties/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"duties",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one Duty",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/duties/aaaa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"duties",
+						"aaaa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete one Duty",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/duties/aaaaa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"duties",
+						"aaaaa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put one Duty",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\":\"New Duty modified again\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/duties/aaaa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"duties",
+						"aaaa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Duty",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Id\":\"aaaaa\",\n    \"Name\":\"New Duty\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/duties",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"duties"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
