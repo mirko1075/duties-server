@@ -3,7 +3,10 @@ const createError = require("http-errors");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Duties = require("../models/duty.model");
+const DutyService = require("../services/dutiesService");
 require("dotenv").config();
+
+const dutyService = new DutyService();
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -22,7 +25,8 @@ mongoose
 // GET '/duties' Get all duties
 router.get("/", (req, res, next) => {
   console.log("Get duties list");
-  Duties.find()
+  dutyService
+    .getList()
     .then((dutiesList) => {
       res.status(200).json(dutiesList);
     })
@@ -35,7 +39,8 @@ router.get("/", (req, res, next) => {
 router.get("/:dutyId", (req, res, next) => {
   console.log("Get duty detail");
   const dutyId = req.params.dutyId;
-  Duties.findOne({ Id: dutyId })
+  dutyService
+    .getDuty(dutyId)
     .then((dutyFound) => {
       res.status(200).json(dutyFound);
     })
@@ -48,7 +53,8 @@ router.get("/:dutyId", (req, res, next) => {
 router.delete("/:dutyId", (req, res, next) => {
   console.log("Get duty detail");
   const dutyId = req.params.dutyId;
-  Duties.findOneAndDelete({ Id: dutyId })
+  dutyService
+    .deleteDuty(dutyId)
     .then((dutyFound) => {
       res.status(200).json(dutyFound);
     })
@@ -62,13 +68,8 @@ router.put("/:dutyId", (req, res, next) => {
   console.log("Put duty detail");
   const dutyId = req.params.dutyId;
   const { Id, Name } = req.body;
-  Duties.findOneAndUpdate(
-    { Id: dutyId },
-    { Id, Name },
-    {
-      returnDocument: "after",
-    }
-  )
+  dutyService
+    .putDuty(dutyId, { Id, Name })
     .then((dutyFound) => {
       res.status(200).json(dutyFound);
     })
