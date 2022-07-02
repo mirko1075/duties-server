@@ -4,6 +4,7 @@ const router = express.Router();
 
 module.exports = (params) => {
   const { dutyService } = params;
+  console.log("dutyService :>> ", dutyService);
   // GET '/duties' Get all duties
   router.get("/", (req, res, next) => {
     console.log("Get duties list");
