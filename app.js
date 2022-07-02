@@ -8,6 +8,9 @@ const cors = require("cors");
 const indexRouter = require("./routes/index");
 const dutiesRouter = require("./routes/duty");
 
+const DutyService = require("./services/dutiesService");
+const dutyService = new DutyService();
+
 const app = express();
 
 // view engine setup
@@ -21,8 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api", indexRouter);
-app.use("/api/duties", dutiesRouter);
+app.use("/api", indexRouter());
+app.use("/api/duties", dutiesRouter(dutyService));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
