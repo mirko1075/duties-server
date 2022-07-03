@@ -12,7 +12,6 @@ class FeedbackService {
   async getList() {
     try {
       const data = await Duties.find();
-
       return data;
     } catch (error) {
       console.log("error :>> ", error);
