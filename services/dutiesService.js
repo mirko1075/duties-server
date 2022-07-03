@@ -10,12 +10,8 @@ class FeedbackService {
    * Get all duties items
    */
   async getList() {
-    try {
-      const data = await Duties.find();
-      return data;
-    } catch (error) {
-      console.log("error :>> ", error);
-    }
+    const data = await Duties.find();
+    return data;
   }
 
   /**
@@ -23,12 +19,8 @@ class FeedbackService {
    * @param {*} Id The Id of Duty
    */
   async getDuty(Id) {
-    try {
-      const data = await Duties.findOne({ Id: Id });
-      return data;
-    } catch (error) {
-      console.log("error :>> ", error);
-    }
+    const data = await Duties.findOne({ Id: Id });
+    return data;
   }
 
   /**
@@ -36,12 +28,8 @@ class FeedbackService {
    * @param {*} Id The Id of Duty
    */
   async deleteDuty(Id) {
-    try {
-      const data = await Duties.findOneAndDelete({ Id: Id });
-      return data;
-    } catch (error) {
-      console.log("error :>> ", error);
-    }
+    const data = await Duties.findOneAndDelete({ Id: Id });
+    return data;
   }
 
   /**
@@ -49,16 +37,14 @@ class FeedbackService {
    * @param {*} Id The Id of Duty
    * @param {*} Name The Name of the Duty
    */
-  async addDuty(Id, Namwe) {
-    try {
-      const data = await Duties.create({
-        Id,
-        Name,
-      });
-      return data;
-    } catch (error) {
-      console.log("error :>> ", error);
-    }
+  async addDuty(Id, Name) {
+    const existentDuty = await this.getDuty(Id);
+    if (existentDuty) throw new Error("Id already present in DB");
+    const data = await Duties.create({
+      Id,
+      Name,
+    });
+    return data;
   }
 
   /**
@@ -67,18 +53,18 @@ class FeedbackService {
    * @param {*} Name The Name of the Duty
    */
   async putDuty(dutyId, { Id, Name }) {
-    try {
-      const data = await Duties.findOneAndUpdate(
-        { Id: dutyId },
-        { Id, Name },
-        {
-          returnDocument: "after",
-        }
-      );
-      return data;
-    } catch (error) {
-      console.log("error :>> ", error);
+    if (Id !== "" && Id !== dutyId) {
+      const existentDuty = await this.getDuty(Id);
+      if (existentDuty) throw new Error("Id already present in DB");
     }
+    const data = await Duties.findOneAndUpdate(
+      { Id: dutyId },
+      { Id, Name },
+      {
+        returnDocument: "after",
+      }
+    );
+    return data;
   }
 }
 
